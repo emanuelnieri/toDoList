@@ -13,7 +13,7 @@ h1{
     color: #ffffff;
     font-size: 52px;
     opacity: 0.8;
-    position: absolute;
+    position: relative;
     justify-self: center;
     text-align: center;  
 }
