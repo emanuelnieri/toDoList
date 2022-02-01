@@ -1,11 +1,17 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    height: 100vw;
     background: linear-gradient(
         130deg,
         #632de0,
-        #ecbff1
-    );
+        #ecbff1);
+}
+
+.box{
+    position: absolute;
+    width: auto;
+    top: 50%;
+    left: 50%;
+    margin: -350px 0 0 -255px;
 }
 
 h1{
@@ -18,11 +24,8 @@ h1{
 }
 
 .container{
-    border: 2px solid white;
-    width: 23vw;
-    position: absolute;
-    top: 18%;
-    left: 36.5%;
+    border: 2px solid #ffffff;
+    width: 23vw;   
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 15px 30px rgba(0,0,0,0.5); 
@@ -43,6 +46,7 @@ h1{
     font-size: 18px;
     width: 70%;
     height: 35px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
 
 #inputField:focus{
@@ -90,4 +94,6 @@ button{
 .completed{
     text-decoration: line-through;
 }
+
+
 
