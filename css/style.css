@@ -9,9 +9,9 @@ body{
 .box{
     position: absolute;
     width: auto;
-    top: 50%;
-    left: 50%;
-    margin: -350px 0 0 -255px;
+    top: 25vw;
+    left: 50vw;
+    margin: -18vw 0 0 -13vw;
 }
 
 h1{
@@ -44,7 +44,7 @@ h1{
     margin: 0px 10px;
     border-radius: 10px;
     font-size: 18px;
-    width: 70%;
+    width: 13vw;
     height: 35px;
     box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
@@ -61,8 +61,8 @@ button{
     border-radius: 10px;
     margin: 0px 10px;
     font-size: 16px;
-    width: 15%;
-    height: 40px;
+    width: 2.5vw;
+    height: 2.1vw;
     background-color: #7345df;
     cursor: pointer;
     color: #ffffff;
