@@ -76,8 +76,11 @@ function loadToDoListFromCookies() {
     if (cookieValue) {
         var todoList = JSON.parse(decodeURIComponent(cookieValue));
 
-        // Adiciona as tarefas da lista de cookies ao HTML
+        // Limpa a lista existente
         var list = document.getElementById("list");
+        list.innerHTML = "";
+
+        // Adiciona as tarefas da lista de cookies ao HTML
         for (var i = 0; i < todoList.length; i++) {
             var todo = todoList[i];
             var completedClass = todo.completed ? "completed" : "";
@@ -92,6 +95,13 @@ function loadToDoListFromCookies() {
         updateEventsAndCookies();
     }
 }
+
+// Botão para limpar a lista (zerar)
+document.getElementById("clearList").onclick = function () {
+    var list = document.getElementById("list");
+    list.innerHTML = "";
+    updateCookies();
+};
 
 // Carrega a lista de tarefas dos cookies quando a página é carregada
 loadToDoListFromCookies();
