@@ -28,16 +28,20 @@ function addTodo() {
     inputField.value = "";
     inputField.focus();
 
-    // Adiciona eventos de clique e cookie
-    updateEventsAndCookies();
+    // Adiciona eventos de clique
+    updateEvents();
+
+    // Atualiza cookies após adicionar uma nova tarefa
+    updateCookies();
 }
 
-// Função para atualizar eventos de clique e cookies
-function updateEventsAndCookies() {
+// Função para atualizar eventos de clique
+function updateEvents() {
     var currentToDos = document.getElementsByClassName("delete");
     for (var i = 0; i < currentToDos.length; i++) {
         currentToDos[i].onclick = function () {
             this.parentNode.remove();
+            // Atualiza cookies após remover uma tarefa
             updateCookies();
         };
     }
@@ -46,12 +50,10 @@ function updateEventsAndCookies() {
     for (var i = 0; i < toDoItems.length; i++) {
         toDoItems[i].onclick = function () {
             this.classList.toggle("completed");
+            // Atualiza cookies após marcar uma tarefa como concluída
             updateCookies();
         };
     }
-
-    // Salva os dados da lista de tarefas em cookies
-    saveToDoListToCookies();
 }
 
 // Função para salvar a lista de tarefas em cookies
@@ -92,7 +94,7 @@ function loadToDoListFromCookies() {
         }
 
         // Atualiza eventos de clique
-        updateEventsAndCookies();
+        updateEvents();
     }
 }
 
@@ -100,10 +102,15 @@ function loadToDoListFromCookies() {
 document.getElementById("clearList").onclick = function () {
     var list = document.getElementById("list");
     list.innerHTML = "";
+    // Atualiza cookies após limpar a lista
     updateCookies();
 };
 
+// Função para atualizar os cookies após qualquer alteração na lista
+function updateCookies() {
+    saveToDoListToCookies();
+}
+
 // Carrega a lista de tarefas dos cookies quando a página é carregada
 loadToDoListFromCookies();
-
 
