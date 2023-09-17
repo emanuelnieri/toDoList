@@ -28,14 +28,14 @@ h1{
     width: 23vw;   
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
 }
 
 .containerBox{
     background-color: #ffffff;
     padding: 40px 30px;
     border-radius: 10px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
 #inputField{
@@ -46,7 +46,7 @@ h1{
     font-size: 18px;
     width: 13vw;
     height: 35px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 #inputField:focus{
@@ -74,7 +74,7 @@ button{
     border-radius: 10px;
     width: 100%;
     position: relative;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .toDo{
