@@ -1,37 +1,99 @@
-document.getElementById("addToDo").onclick = () =>{
-    if(document.getElementById("inputField").value == ""){
-        document.getElementById("inputField").focus();
+document.getElementById("addToDo").onclick = addTodo;
+
+document.getElementById("inputField").addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+        addTodo();
     }
-    else{
-        document.getElementById("list").innerHTML
-        += `
-            <div class="toDo">
-                <span id="toDoName">
-                    ${(document.getElementById("inputField").value)}
-                </span>
-                <button class="delete">
-                    -
-                </button>
-            </div>
-        `;
+});
 
-        var current_ToDos = document.getElementsByClassName("delete");
-        for(var i = 0; i < current_ToDos.length; i++){
-            current_ToDos[i].onclick = function() {
-                this.parentNode.remove();
-            }
+// Função para adicionar uma tarefa à lista
+function addTodo() {
+    var inputField = document.getElementById("inputField");
+    var inputValue = inputField.value.trim();
+
+    if (inputValue === "") {
+        inputField.focus();
+        return;
+    }
+
+    // Cria uma nova tarefa e adiciona ao HTML
+    var list = document.getElementById("list");
+    list.innerHTML +=
+        `<div class="toDo">
+            <span id="toDoName">${inputValue}</span>
+            <button class="delete">-</button>
+        </div>`;
+
+    // Limpa o campo de entrada e define o foco novamente
+    inputField.value = "";
+    inputField.focus();
+
+    // Adiciona eventos de clique e cookie
+    updateEventsAndCookies();
+}
+
+// Função para atualizar eventos de clique e cookies
+function updateEventsAndCookies() {
+    var currentToDos = document.getElementsByClassName("delete");
+    for (var i = 0; i < currentToDos.length; i++) {
+        currentToDos[i].onclick = function () {
+            this.parentNode.remove();
+            updateCookies();
+        };
+    }
+
+    var toDoItems = document.getElementsByClassName("toDo");
+    for (var i = 0; i < toDoItems.length; i++) {
+        toDoItems[i].onclick = function () {
+            this.classList.toggle("completed");
+            updateCookies();
+        };
+    }
+
+    // Salva os dados da lista de tarefas em cookies
+    saveToDoListToCookies();
+}
+
+// Função para salvar a lista de tarefas em cookies
+function saveToDoListToCookies() {
+    var toDoItems = document.getElementsByClassName("toDo");
+    var todoList = [];
+
+    for (var i = 0; i < toDoItems.length; i++) {
+        var toDoName = toDoItems[i].querySelector("#toDoName").textContent;
+        var completed = toDoItems[i].classList.contains("completed");
+        todoList.push({ name: toDoName, completed: completed });
+    }
+
+    // Converte a lista de tarefas em JSON e a salva em cookies
+    var todoListJSON = JSON.stringify(todoList);
+    document.cookie = "todoList=" + todoListJSON;
+}
+
+// Função para carregar a lista de tarefas dos cookies, se existir
+function loadToDoListFromCookies() {
+    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)todoList\s*=\s*([^;]*).*$)|^.*$/, "$1");
+    if (cookieValue) {
+        var todoList = JSON.parse(decodeURIComponent(cookieValue));
+
+        // Adiciona as tarefas da lista de cookies ao HTML
+        var list = document.getElementById("list");
+        for (var i = 0; i < todoList.length; i++) {
+            var todo = todoList[i];
+            var completedClass = todo.completed ? "completed" : "";
+            list.innerHTML +=
+                `<div class="toDo ${completedClass}">
+                    <span id="toDoName">${todo.name}</span>
+                    <button class="delete">-</button>
+                </div>`;
         }
 
-        var toDo = document.getElementsByClassName("toDo");
-        for(var i = 0; i < toDo.length; i++){
-            toDo[i].onclick = function() {
-                this.classList.toggle("completed");
-            }
-        }
-
-        document.getElementById("inputField").value = "";
-        document.getElementById("inputField").focus();
+        // Atualiza eventos de clique
+        updateEventsAndCookies();
     }
 }
+
+// Carrega a lista de tarefas dos cookies quando a página é carregada
+loadToDoListFromCookies();
 
 
