@@ -1,3 +1,6 @@
+// Carrega a lista de tarefas dos cookies quando a página é carregada
+loadToDoListFromCookies();
+
 document.getElementById("addToDo").onclick = addTodo;
 
 document.getElementById("inputField").addEventListener("keyup", function (event) {
@@ -121,5 +124,4 @@ function updateCookies() {
     saveToDoListToCookies();
 }
 
-// Carrega a lista de tarefas dos cookies quando a página é carregada
-loadToDoListFromCookies();
+
