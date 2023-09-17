@@ -57,15 +57,10 @@ function updateEventsAndCookies() {
     saveToDoListToCookies();
 }
 
-// Função para salvar a lista de tarefas e o estado em cookies
+// Função para salvar a lista de tarefas em cookies
 function saveToDoListToCookies() {
     var toDoItems = document.getElementsByClassName("toDo");
     var todoList = [];
-    var listState = "empty"; // Inicialmente, a lista está vazia
-
-    if (toDoItems.length > 0) {
-        listState = "hasItems";
-    }
 
     for (var i = 0; i < toDoItems.length; i++) {
         var toDoName = toDoItems[i].querySelector("#toDoName").textContent;
@@ -73,30 +68,24 @@ function saveToDoListToCookies() {
         todoList.push({ name: toDoName, completed: completed });
     }
 
-    // Cria um objeto com a lista de tarefas e o estado
-    var todoData = {
-        listState: listState,
-        todoList: todoList,
-    };
-
-    // Converte o objeto em JSON e o salva em cookies
-    var todoDataJSON = JSON.stringify(todoData);
-    document.cookie = "todoData=" + todoDataJSON;
+    // Converte a lista de tarefas em JSON e a salva em cookies
+    var todoListJSON = JSON.stringify(todoList);
+    document.cookie = "todoList=" + todoListJSON;
 }
 
 // Função para carregar a lista de tarefas dos cookies, se existir
 function loadToDoListFromCookies() {
-    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)todoData\s*=\s*([^;]*).*$)|^.*$/, "$1");
+    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)todoList\s*=\s*([^;]*).*$)|^.*$/, "$1");
     if (cookieValue) {
-        var todoData = JSON.parse(decodeURIComponent(cookieValue));
+        var todoList = JSON.parse(decodeURIComponent(cookieValue));
 
         // Limpa a lista existente
         var list = document.getElementById("list");
         list.innerHTML = "";
 
         // Adiciona as tarefas da lista de cookies ao HTML
-        for (var i = 0; i < todoData.todoList.length; i++) {
-            var todo = todoData.todoList[i];
+        for (var i = 0; i < todoList.length; i++) {
+            var todo = todoList[i];
             var completedClass = todo.completed ? "completed" : "";
             list.innerHTML +=
                 `<div class="toDo ${completedClass}">
@@ -106,8 +95,7 @@ function loadToDoListFromCookies() {
         }
 
         // Atualiza eventos de clique
-        updateEvents();
-
+        updateEventsAndCookies();
     }
 }
 
@@ -123,5 +111,3 @@ document.getElementById("clearList").onclick = function () {
 function updateCookies() {
     saveToDoListToCookies();
 }
-
-
