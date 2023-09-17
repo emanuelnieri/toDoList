@@ -28,20 +28,16 @@ function addTodo() {
     inputField.value = "";
     inputField.focus();
 
-    // Adiciona eventos de clique
-    updateEvents();
-
-    // Atualiza cookies após adicionar uma nova tarefa
-    updateCookies();
+    // Adiciona eventos de clique e cookie
+    updateEventsAndCookies();
 }
 
-// Função para atualizar eventos de clique
-function updateEvents() {
+// Função para atualizar eventos de clique e cookies
+function updateEventsAndCookies() {
     var currentToDos = document.getElementsByClassName("delete");
     for (var i = 0; i < currentToDos.length; i++) {
         currentToDos[i].onclick = function () {
             this.parentNode.remove();
-            // Atualiza cookies após remover uma tarefa
             updateCookies();
         };
     }
@@ -50,16 +46,23 @@ function updateEvents() {
     for (var i = 0; i < toDoItems.length; i++) {
         toDoItems[i].onclick = function () {
             this.classList.toggle("completed");
-            // Atualiza cookies após marcar uma tarefa como concluída
             updateCookies();
         };
     }
+
+    // Salva os dados da lista de tarefas em cookies
+    saveToDoListToCookies();
 }
 
-// Função para salvar a lista de tarefas em cookies
+// Função para salvar a lista de tarefas e o estado em cookies
 function saveToDoListToCookies() {
     var toDoItems = document.getElementsByClassName("toDo");
     var todoList = [];
+    var listState = "empty"; // Inicialmente, a lista está vazia
+
+    if (toDoItems.length > 0) {
+        listState = "hasItems";
+    }
 
     for (var i = 0; i < toDoItems.length; i++) {
         var toDoName = toDoItems[i].querySelector("#toDoName").textContent;
@@ -67,24 +70,30 @@ function saveToDoListToCookies() {
         todoList.push({ name: toDoName, completed: completed });
     }
 
-    // Converte a lista de tarefas em JSON e a salva em cookies
-    var todoListJSON = JSON.stringify(todoList);
-    document.cookie = "todoList=" + todoListJSON;
+    // Cria um objeto com a lista de tarefas e o estado
+    var todoData = {
+        listState: listState,
+        todoList: todoList,
+    };
+
+    // Converte o objeto em JSON e o salva em cookies
+    var todoDataJSON = JSON.stringify(todoData);
+    document.cookie = "todoData=" + todoDataJSON;
 }
 
 // Função para carregar a lista de tarefas dos cookies, se existir
 function loadToDoListFromCookies() {
-    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)todoList\s*=\s*([^;]*).*$)|^.*$/, "$1");
+    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)todoData\s*=\s*([^;]*).*$)|^.*$/, "$1");
     if (cookieValue) {
-        var todoList = JSON.parse(decodeURIComponent(cookieValue));
+        var todoData = JSON.parse(decodeURIComponent(cookieValue));
 
         // Limpa a lista existente
         var list = document.getElementById("list");
         list.innerHTML = "";
 
         // Adiciona as tarefas da lista de cookies ao HTML
-        for (var i = 0; i < todoList.length; i++) {
-            var todo = todoList[i];
+        for (var i = 0; i < todoData.todoList.length; i++) {
+            var todo = todoData.todoList[i];
             var completedClass = todo.completed ? "completed" : "";
             list.innerHTML +=
                 `<div class="toDo ${completedClass}">
@@ -95,6 +104,7 @@ function loadToDoListFromCookies() {
 
         // Atualiza eventos de clique
         updateEvents();
+
     }
 }
 
@@ -113,4 +123,3 @@ function updateCookies() {
 
 // Carrega a lista de tarefas dos cookies quando a página é carregada
 loadToDoListFromCookies();
-
