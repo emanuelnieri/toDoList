@@ -8,13 +8,12 @@ body {
     margin: 0; /* Remover margens padrão */
 }
 
-.box {
-    /* As regras para .box podem permanecer as mesmas */
+.box{
     position: absolute;
     width: auto;
-    top: 25%;
-    left: 50%;
-    margin: -18% 0 0 -13%;
+    top: 25vw;
+    left: 50vw;
+    margin: -18vw 0 0 -13vw;
 }
 
 h1 {
@@ -50,8 +49,8 @@ h1 {
     margin: 0px 10px;
     border-radius: 10px;
     font-size: 18px;
-    width: 13vw;
-    height: 35px;
+    width: 80%;
+    height: 10%;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
@@ -66,8 +65,8 @@ button {
     border-radius: 10px;
     margin: 0px 10px;
     font-size: 16px;
-    width: 2.5vw;
-    height: 2.1vw;
+    width: 10%;
+    height: 10%;
     background-color: #7345df;
     cursor: pointer;
     color: #ffffff;
