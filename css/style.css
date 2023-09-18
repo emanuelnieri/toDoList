@@ -1,11 +1,9 @@
-body {
+body{
     font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(130deg, #632de0, #ecbff1);
-    display: flex; /* Adicionar um display flex para centralizar o conteúdo verticalmente */
-    justify-content: center; /* Centralizar horizontalmente */
-    align-items: center; /* Centralizar verticalmente */
-    height: 100vh; /* Fazer com que o corpo da página ocupe toda a altura da tela */
-    margin: 0; /* Remover margens padrão */
+    background: linear-gradient(
+        130deg,
+        #632de0,
+        #ecbff1);
 }
 
 .box{
@@ -16,60 +14,84 @@ body {
     margin: -18vw 0 0 -13vw;
 }
 
-h1 {
-    /* As regras para h1 podem permanecer as mesmas */
+h1{
     color: #ffffff;
     font-size: 52px;
     opacity: 0.8;
     position: relative;
     justify-self: center;
-    text-align: center;
+    text-align: center; 
 }
 
-.container {
-    /* As regras para .container podem permanecer as mesmas */
+.container{
     border: 2px solid #ffffff;
-    width: 90%;
-    padding: 3%;
+    width: 23vw;   
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5); 
 }
 
-.containerBox {
-    /* As regras para .containerBox podem permanecer as mesmas */
+.containerBox{
     background-color: #ffffff;
-    padding: 4% 3%;
+    padding: 40px 30px;
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
-#inputField {
+#inputField{
     border: 2px solid #d1d3d4;
     border: auto;
     margin: 0px 10px;
     border-radius: 10px;
     font-size: 18px;
-    width: 80%;
-    height: 10%;
+    width: 13vw;
+    height: 35px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-#inputField:focus {
+#inputField:focus{
     outline: none;
     border: 2px solid #7345df;
 }
 
-button {
+
+button{
     float: right;
     border: 2px solid #5a27cf;
     border-radius: 10px;
     margin: 0px 10px;
     font-size: 16px;
-    width: 10%;
-    height: 10%;
+    width: 2.5vw;
+    height: 2.1vw;
     background-color: #7345df;
     cursor: pointer;
     color: #ffffff;
 }
 
+#list{
+    background-color: #ffffff;
+    margin-top: 30px;
+    border-radius: 10px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.toDo{
+    background-color: #ffffff;
+    font-size: 20px;
+    padding: 10px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #e9ebec;
+}
+
+#toDoName{
+    text-transform: capitalize;
+}
+
+.completed{
+    text-decoration: line-through;
+}
 
