@@ -1,9 +1,15 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: linear-gradient(130deg, #632de0, #ecbff1);
+    display: flex; /* Adicionar um display flex para centralizar o conteúdo verticalmente */
+    justify-content: center; /* Centralizar horizontalmente */
+    align-items: center; /* Centralizar verticalmente */
+    height: 100vh; /* Fazer com que o corpo da página ocupe toda a altura da tela */
+    margin: 0; /* Remover margens padrão */
 }
 
 .box {
+    /* As regras para .box podem permanecer as mesmas */
     position: absolute;
     width: auto;
     top: 25%;
@@ -12,6 +18,7 @@ body {
 }
 
 h1 {
+    /* As regras para h1 podem permanecer as mesmas */
     color: #ffffff;
     font-size: 5vw;
     opacity: 0.8;
@@ -19,6 +26,7 @@ h1 {
 }
 
 .container {
+    /* As regras para .container podem permanecer as mesmas */
     border: 2px solid #ffffff;
     width: 90%;
     padding: 3%;
@@ -27,6 +35,7 @@ h1 {
 }
 
 .containerBox {
+    /* As regras para .containerBox podem permanecer as mesmas */
     background-color: #ffffff;
     padding: 4% 3%;
     border-radius: 10px;
@@ -34,10 +43,11 @@ h1 {
 }
 
 #inputField {
+    /* Diminuir o tamanho da caixa de texto e centralizá-la */
     border: 2px solid #d1d3d4;
     border-radius: 10px;
-    font-size: 3vw;
-    width: 40%;
+    font-size: 2vw; /* Diminuir o tamanho da fonte */
+    width: 60%;
     height: 5%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
@@ -48,64 +58,44 @@ h1 {
 }
 
 button {
+    /* Alinhar o botão ao lado da caixa de texto */
     border: 2px solid #5a27cf;
     border-radius: 10px;
     font-size: 2vw;
-    width: 10%;
+    width: 20%; /* Aumentar a largura do botão */
     height: 5%;
     background-color: #7345df;
     cursor: pointer;
     color: #ffffff;
-}
-
-#list {
-    background-color: #ffffff;
-    margin-top: 3%;
-    border-radius: 10px;
-    width: 100%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.toDo {
-    background-color: #ffffff;
-    font-size: 4vw;
-    padding: 2% 3%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid #e9ebec;
-}
-
-#toDoName {
-    text-transform: capitalize;
-}
-
-.completed {
-    text-decoration: line-through;
+    margin-left: 1%; /* Adicionar margem à esquerda para separar o botão da caixa de texto */
 }
 
 @media (max-width: 768px) {
     .box {
+        /* As regras para .box podem permanecer as mesmas */
         top: 10%;
     }
 
     h1 {
+        /* As regras para h1 podem permanecer as mesmas */
         font-size: 3vw;
     }
 
     .container {
+        /* As regras para .container podem permanecer as mesmas */
         width: 95%;
     }
 
     #inputField {
+        /* As regras para #inputField podem permanecer as mesmas */
         font-size: 4vw;
         width: 60%;
     }
 
     button {
+        /* As regras para o botão em telas menores podem permanecer as mesmas */
         font-size: 3vw;
-        width: 15%;
+        width: 20%;
     }
 }
-
 
