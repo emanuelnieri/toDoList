@@ -20,8 +20,10 @@ body {
 h1 {
     /* As regras para h1 podem permanecer as mesmas */
     color: #ffffff;
-    font-size: 5vw;
+    font-size: 52px;
     opacity: 0.8;
+    position: relative;
+    justify-self: center;
     text-align: center;
 }
 
@@ -43,13 +45,14 @@ h1 {
 }
 
 #inputField {
-    /* Diminuir o tamanho da caixa de texto e centralizá-la */
     border: 2px solid #d1d3d4;
+    border: auto;
+    margin: 0px 10px;
     border-radius: 10px;
-    font-size: 2vw; /* Diminuir o tamanho da fonte */
-    width: 60%;
-    height: 5%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    width: 13vw;
+    height: 35px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 #inputField:focus {
@@ -58,44 +61,16 @@ h1 {
 }
 
 button {
-    /* Alinhar o botão ao lado da caixa de texto */
+    float: right;
     border: 2px solid #5a27cf;
     border-radius: 10px;
-    font-size: 2vw;
-    width: 20%; /* Aumentar a largura do botão */
-    height: 5%;
+    margin: 0px 10px;
+    font-size: 16px;
+    width: 2.5vw;
+    height: 2.1vw;
     background-color: #7345df;
     cursor: pointer;
     color: #ffffff;
-    margin-left: 1%; /* Adicionar margem à esquerda para separar o botão da caixa de texto */
 }
 
-@media (max-width: 768px) {
-    .box {
-        /* As regras para .box podem permanecer as mesmas */
-        top: 10%;
-    }
-
-    h1 {
-        /* As regras para h1 podem permanecer as mesmas */
-        font-size: 3vw;
-    }
-
-    .container {
-        /* As regras para .container podem permanecer as mesmas */
-        width: 95%;
-    }
-
-    #inputField {
-        /* As regras para #inputField podem permanecer as mesmas */
-        font-size: 4vw;
-        width: 60%;
-    }
-
-    button {
-        /* As regras para o botão em telas menores podem permanecer as mesmas */
-        font-size: 3vw;
-        width: 20%;
-    }
-}
 
