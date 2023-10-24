@@ -1,5 +1,5 @@
-// Carrega a lista de tarefas dos cookies quando a página é carregada
-loadToDoListFromCookies();
+// Carrega a lista de tarefas do localStorage quando a página é carregada
+loadToDoListFromLocalStorage();
 
 document.getElementById("addToDo").onclick = addTodo;
 
@@ -21,27 +21,33 @@ function addTodo() {
 
     // Cria uma nova tarefa e adiciona ao HTML
     var list = document.getElementById("list");
-    list.innerHTML +=
-        `<div class="toDo">
-            <span id="toDoName">${inputValue}</span>
-            <button class="delete">-</button>
-        </div>`;
+    var toDoItem = document.createElement("div");
+    toDoItem.className = "toDo";
+    var toDoName = document.createElement("span");
+    toDoName.id = "toDoName";
+    toDoName.textContent = inputValue;
+    var deleteButton = document.createElement("button");
+    deleteButton.className = "delete";
+    deleteButton.textContent = "-";
+    toDoItem.appendChild(toDoName);
+    toDoItem.appendChild(deleteButton);
+    list.appendChild(toDoItem);
 
     // Limpa o campo de entrada e define o foco novamente
     inputField.value = "";
     inputField.focus();
 
-    // Adiciona eventos de clique e cookie
-    updateEventsAndCookies();
+    // Adiciona eventos de clique e atualiza o localStorage
+    updateEventsAndLocalStorage();
 }
 
-// Função para atualizar eventos de clique e cookies
-function updateEventsAndCookies() {
+// Função para atualizar eventos de clique e localStorage
+function updateEventsAndLocalStorage() {
     var currentToDos = document.getElementsByClassName("delete");
     for (var i = 0; i < currentToDos.length; i++) {
         currentToDos[i].onclick = function () {
             this.parentNode.remove();
-            updateCookies();
+            updateLocalStorage();
         };
     }
 
@@ -49,16 +55,16 @@ function updateEventsAndCookies() {
     for (var i = 0; i < toDoItems.length; i++) {
         toDoItems[i].onclick = function () {
             this.classList.toggle("completed");
-            updateCookies();
+            updateLocalStorage();
         };
     }
 
-    // Salva os dados da lista de tarefas em cookies
-    saveToDoListToCookies();
+    // Salva os dados da lista de tarefas no localStorage
+    saveToDoListToLocalStorage();
 }
 
-// Função para salvar a lista de tarefas em cookies com duração de 366 dias
-function saveToDoListToCookies() {
+// Função para salvar a lista de tarefas no localStorage
+function saveToDoListToLocalStorage() {
     var toDoItems = document.getElementsByClassName("toDo");
     var todoList = [];
 
@@ -68,40 +74,40 @@ function saveToDoListToCookies() {
         todoList.push({ name: toDoName, completed: completed });
     }
 
-    // Converte a lista de tarefas em JSON
+    // Converte a lista de tarefas em JSON e a salva no localStorage
     var todoListJSON = JSON.stringify(todoList);
-
-    // Define a data de expiração para daqui a 366 dias
-    var expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 366);
-
-    // Salva os dados da lista de tarefas em cookies com uma duração de 366 dias
-    document.cookie = `todoList=${todoListJSON}; expires=${expirationDate.toUTCString()}`;
+    localStorage.setItem("todoList", todoListJSON);
 }
 
-// Função para carregar a lista de tarefas dos cookies, se existir
-function loadToDoListFromCookies() {
-    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)todoList\s*=\s*([^;]*).*$)|^.*$/, "$1");
-    if (cookieValue) {
-        var todoList = JSON.parse(decodeURIComponent(cookieValue));
+// Função para carregar a lista de tarefas do localStorage, se existir
+function loadToDoListFromLocalStorage() {
+    var todoListJSON = localStorage.getItem("todoList");
+    if (todoListJSON) {
+        var todoList = JSON.parse(todoListJSON);
 
         // Limpa a lista existente
         var list = document.getElementById("list");
         list.innerHTML = "";
 
-        // Adiciona as tarefas da lista de cookies ao HTML
+        // Adiciona as tarefas da lista do localStorage ao HTML
         for (var i = 0; i < todoList.length; i++) {
             var todo = todoList[i];
             var completedClass = todo.completed ? "completed" : "";
-            list.innerHTML +=
-                `<div class="toDo ${completedClass}">
-                    <span id="toDoName">${todo.name}</span>
-                    <button class="delete">-</button>
-                </div>`;
+            var toDoItem = document.createElement("div");
+            toDoItem.className = `toDo ${completedClass}`;
+            var toDoName = document.createElement("span");
+            toDoName.id = "toDoName";
+            toDoName.textContent = todo.name;
+            var deleteButton = document.createElement("button");
+            deleteButton.className = "delete";
+            deleteButton.textContent = "-";
+            toDoItem.appendChild(toDoName);
+            toDoItem.appendChild(deleteButton);
+            list.appendChild(toDoItem);
         }
 
         // Atualiza eventos de clique
-        updateEventsAndCookies();
+        updateEventsAndLocalStorage();
     }
 }
 
@@ -109,11 +115,11 @@ function loadToDoListFromCookies() {
 document.getElementById("clearList").onclick = function () {
     var list = document.getElementById("list");
     list.innerHTML = "";
-    // Atualiza cookies após limpar a lista
-    updateCookies();
+    // Atualiza o localStorage após limpar a lista
+    updateLocalStorage();
 };
 
-// Função para atualizar os cookies após qualquer alteração na lista
-function updateCookies() {
-    saveToDoListToCookies();
+// Função para atualizar o localStorage após qualquer alteração na lista
+function updateLocalStorage() {
+    saveToDoListToLocalStorage();
 }
