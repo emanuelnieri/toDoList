@@ -57,7 +57,7 @@ function updateEventsAndCookies() {
     saveToDoListToCookies();
 }
 
-// Função para salvar a lista de tarefas em cookies
+// Função para salvar a lista de tarefas em cookies com duração de 366 dias
 function saveToDoListToCookies() {
     var toDoItems = document.getElementsByClassName("toDo");
     var todoList = [];
@@ -68,9 +68,15 @@ function saveToDoListToCookies() {
         todoList.push({ name: toDoName, completed: completed });
     }
 
-    // Converte a lista de tarefas em JSON e a salva em cookies
+    // Converte a lista de tarefas em JSON
     var todoListJSON = JSON.stringify(todoList);
-    document.cookie = "todoList=" + todoListJSON;
+
+    // Define a data de expiração para daqui a 366 dias
+    var expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 366);
+
+    // Salva os dados da lista de tarefas em cookies com uma duração de 366 dias
+    document.cookie = `todoList=${todoListJSON}; expires=${expirationDate.toUTCString()}`;
 }
 
 // Função para carregar a lista de tarefas dos cookies, se existir
